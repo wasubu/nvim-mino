@@ -1,5 +1,7 @@
 # 💤 Nvim-mino (Windows)
 
+![Screenshot](images/nvim-mino.png)
+
 Welcome to my Neovim setup! — not the best but I wanted to share this for anyone using windows.
 
 All plugins are \*\*lazy-loaded\*\* for faster startup and modularity.
