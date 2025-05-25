@@ -1,0 +1,37 @@
+# === Backups and Archives ===
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# === Editor swap/backup files ===
+*.swp
+*.swo
+*.bak
+
+# === Neovim plugin metadata ===
+*.luarc.json
+*.luarc.jsonc
+
+# === Lua language server cache ===
+.lua/
+
+# === Node.js (if any plugin uses it) ===
+node_modules/
+package-lock.json
+yarn.lock
+
+# === Python virtual environments ===
+.venv/
+venv/
+.env/
+
+# === OS-specific files ===
+.DS_Store
+Thumbs.db
+
+# === Reference folder: include folder but ignore contents ===
+reference/*
+
+# === Optional: ignore custom system config ===
+myvimrc/
