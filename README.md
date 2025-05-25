@@ -8,7 +8,7 @@ All plugins are \*\*lazy-loaded\*\* for faster startup and modularity.
 
 ---
 
-## 📥 Installation (Windows)
+## 🪟 Installation (Windows)
 
 Before getting started, make sure you have:
 
