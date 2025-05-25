@@ -1,4 +1,3 @@
-```markdown
 # 💤 Nvim-mino (Windows)
 
 Welcome to my Neovim setup! — not the best but I wanted to share this for anyone using windows.
@@ -34,4 +33,4 @@ All plugins are \*\*lazy-loaded\*\* for faster startup and modularity.
 | 💾 Undo Manager | \[mbbill/undotree\]([https://github.com/mbbill/undotree](https://github.com/mbbill/undotree)) | Visual undo history |
 
 ---
-```
+
