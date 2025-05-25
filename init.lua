@@ -80,6 +80,7 @@ require("lazy").setup({
 	require("plugins.liveserver"),
 	require("plugins.comment"),
 	-- require("plugins.enterfix"),
+	require("plugins.peek"),
 })
 
 vim.cmd([[colorscheme tokyonight]])

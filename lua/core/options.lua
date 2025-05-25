@@ -49,7 +49,14 @@ vim.opt.splitright = true
 vim.opt.splitkeep = "cursor"
 vim.opt.mouse = ""
 
-vim.opt.shell = '"C:\\Program Files\\Git\\usr\\bin\\bash.exe"'
+--[[ vim.opt.shell = '"C:\\Program Files\\Git\\usr\\bin\\bash.exe"'
 vim.opt.shellcmdflag = "-c"
 vim.opt.shellquote = ""
-vim.opt.shellxquote = ""
+vim.opt.shellxquote = "" ]]
+
+if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+	vim.o.shell = "powershell.exe"
+	vim.o.shellcmdflag = "-NoProfile -ExecutionPolicy RemoteSigned -Command"
+	vim.o.shellquote = [["]]
+	vim.o.shellxquote = ""
+end
