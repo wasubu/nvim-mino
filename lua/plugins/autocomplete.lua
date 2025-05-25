@@ -97,14 +97,11 @@ return {
 
 			snippets = {
 				preset = "luasnip",
-				opts = {
-					-- Disable Tab for jumping through snippet fields
-					keymap = {
-						expand = "<nop>",
-						jump_next = "<nop>",
-						jump_prev = "<nop>",
-					},
-				},
+				--[[ keymap = {
+					expand = "<nop>",
+					jump_next = "<nop>",
+					jump_prev = "<nop>",
+				}, ]]
 			},
 
 			fuzzy = { implementation = "lua" },
