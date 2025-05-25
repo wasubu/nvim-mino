@@ -10,17 +10,42 @@ All plugins are \*\*lazy-loaded\*\* for faster startup and modularity.
 
 ## 📥 Installation (Windows)
 
-1. Clone this repository to your Neovim config folder:
-    ```powershell
-    git clone https://github.com/wasubu/nvim-mino.git $env:LOCALAPPDATA\nvim
-    ```
+Before getting started, make sure you have:
 
-2. Launch Neovim:
-    ```powershell
-    nvim
-    ```
+- ✅ [Git for Windows](https://git-scm.com/download/win) installed  
+- ✅ [Neovim](https://neovim.io/) installed (v0.9 or newer recommended)
 
-3. `lazy.nvim` will automatically install itself and start fetching plugins.
+Then clone this config into your **Neovim config directory**:
+
+### PowerShell
+
+```powershell
+git clone https://github.com/wasubu/nvim-mino.git $env:LOCALAPPDATA\nvim
+```
+
+### Command Prompt (`cmd.exe`)
+
+```cmd
+git clone https://github.com/wasubu/nvim-mino.git %LOCALAPPDATA%\nvim
+```
+
+### Git Bash
+
+```bash
+git clone https://github.com/wasubu/nvim-mino.git "$LOCALAPPDATA/nvim"
+```
+
+---
+
+### ▶️ Launch Neovim
+
+Once cloned, just launch Neovim:
+
+```sh
+nvim
+```
+
+> `lazy.nvim` will auto-install itself and begin setting up all plugins on first launch.
 
 ---
 
