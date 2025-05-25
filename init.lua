@@ -1,3 +1,9 @@
+--TODO: [ ] Add comments to explain each things
+--      [ ] assign peek md command
+--      [ ] explain your using git bash
+--      [ ] explain all the keymappings
+
+--TODO: [ ] Put these to keymap
 vim.keymap.set("i", "<Tab>", "<Tab>", { expr = false }) -- cancel built-in snippet jump
 vim.keymap.set("i", "<S-Tab>", "<S-Tab>", { expr = false }) -- cancel built-in snippet jump
 
@@ -13,6 +19,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+--TODO: [ ] Put these to keymap
 vim.keymap.set("n", "<Space>", function()
 	-- Get current window and buffer info
 	local win = vim.api.nvim_get_current_win()
