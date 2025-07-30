@@ -8,6 +8,8 @@ function M.setup()
 		end
 	end, { desc = "Clear search highlight", noremap = true, silent = true })
 
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "LSP Rename" })
+
 	--vim.notify("keyandauto setup running", vim.log.levels.INFO)
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 	--vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })

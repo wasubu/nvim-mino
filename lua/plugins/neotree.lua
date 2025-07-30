@@ -17,8 +17,15 @@ return {
 				local node = state.tree:get_node()
 				local path = node:get_id()
 				os.execute('start "" "' .. path .. '"') -- Windows
-				-- Use `xdg-open "` .. path .. '"` for Linux
-				-- Use `open "' .. path .. '"` for macOS
+				-- Use xdg-open " .. path .. '" for Linux
+				-- Use open "' .. path .. '" for macOS
+			end,
+			reveal_in_file_explorer = function(state)
+				local node = state.tree:get_node()
+				local path = vim.fn.fnamemodify(node:get_id(), ":p")
+				local escaped_path = vim.fn.shellescape(path)
+				-- Reveal in Windows File Explorer
+				os.execute('start "" explorer /select,' .. escaped_path)
 			end,
 			copy_selector = function(state)
 				local node = state.tree:get_node()
@@ -54,7 +61,7 @@ return {
 				}, function(choice)
 					local result = vals[choice]
 					if result then
-						vim.notify(("Copied: `%s`"):format(result))
+						vim.notify(("Copied: %s"):format(result))
 						vim.fn.setreg("+", result)
 					end
 				end)
@@ -65,6 +72,7 @@ return {
 			mappings = {
 				Y = "copy_selector", -- press Y to trigger the custom command
 				I = "open_in_default_app",
+				E = "reveal_in_file_explorer",
 			},
 			width = 25,
 		},
