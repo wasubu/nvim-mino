@@ -42,6 +42,22 @@ function M.setup()
 
 	--vim.keymap.set("n", "<leader><F5>", vim.cmd.UndotreeToggle)
 	vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, { desc = "Toggle UndoTree" })
+
+	vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+	-- Run current Python file in bottom terminal, only if filetype is python
+	vim.keymap.set("n", "<leader>rr", function()
+		-- Check filetype
+		if vim.bo.filetype ~= "python" then
+			print("Not a Python file!")
+			return
+		end
+
+		-- Get full path of current file
+		local file = vim.fn.expand("%:p")
+
+		-- Open terminal at bottom and run Python
+		vim.cmd('botright split | term python "' .. file .. '"')
+	end, { desc = "Run Python in bottom terminal" })
 end
 
 return M
