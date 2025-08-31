@@ -2,17 +2,20 @@
 
 ![Screenshot](images/nvim-mino.png)
 
-Welcome to my custom Neovim setup! This configuration is designed for Windows users, featuring lazy-loaded plugins for fast startup and modularity, providing a modern, efficient, and tailored environment for development. It focuses on intelligent autocompletion, robust LSP integration, a clean UI/UX, efficient file navigation, and streamlined Git workflows.
+Welcome to my custom Neovim setup! This configuration is designed for Windows users that use Git Bash as their main terminal. featuring lazy-loaded plugins for fast startup and modularity. It focuses on intelligent autocompletion, robust LSP integration, a clean UI/UX, file navigation, and streamlined Git workflows.
 
+#### ⚠️ not tested on other computers
 ---
-
 ## 🪟 Installation (Windows)
 
 Before you begin, ensure you have the following prerequisites installed:
 *   ✅ **Git for Windows**
 *   ✅ **Neovim v0.9 or newer**
+*   ✅ **Node JS**
+*   ✅ **Live server**
+*   ✅ **Python**
 
-To install, clone this configuration into your Neovim config directory:
+clone the configuration into your Neovim config directory or manually put the files:
 
 ### PowerShell
 ```powershell
