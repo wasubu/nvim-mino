@@ -20,14 +20,18 @@ local function runPlugins()
 		require("plugins.autoformat"),
 		require("plugins.autocomplete"),
 		require("plugins.neostart"),
-		require("plugins.misc"),
-		require("plugins.gitsigns"),
+		-- [[ Stuff in other_stuff ]]
+		--  vim-tmux-vavigator, vim-sleuth
+		--  vim-fugitive, vime-rhubarb
+		--  which-key.nvim, nvim-autopairs
+		--  todo-comments.nvim, nvim-colorizer.lua
+		--  undotree, Comment.nvim
+		--  gitsigns.nvim, live-server.nvim
+		require("plugins.other_stuff"),
+
 		require("plugins.tablines"),
-		require("plugins.liveserver"),
-		require("plugins.comment"),
 		require("plugins.peek"),
 		require("plugins.fugitive"),
-		-- require("plugins.fold"),
 	})
 end
 

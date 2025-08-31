@@ -1,13 +1,3 @@
-
-
---[[return {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-}--]]
-
-
 return {
 	"folke/tokyonight.nvim",
 	lazy = false,
@@ -47,4 +37,3 @@ return {
     ]])
 	end,
 }
-
