@@ -53,20 +53,11 @@ return {
 	},
 	{
 		"numToStr/Comment.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile" }, -- lazy-load on file open
 		config = function()
 			require("Comment").setup({
-				padding = true,
-				sticky = true,
-				ignore = "",
-				mappings = { basic = true, extra = true, extended = true },
-				toggler = { line = "gcc", block = "gbc" },
-				opleader = { line = "gc", block = "gb" },
-				extra = { above = "gcO", below = "gco", eol = "gcA" },
-				pre_hook = function(_)
-					return ""
-				end,
-				post_hook = function(_) end,
+				-- Add your custom config here if needed
+				-- You can hook into pre/post comment actions as well
 			})
 		end,
 	},

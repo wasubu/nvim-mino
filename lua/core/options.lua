@@ -69,12 +69,12 @@ if _G.MyFoldText == nil then
 end
 
 -- Shell config for Windows
-if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-	opt.shell = [["C:/Program Files/Git/bin/bash.exe"]]
-	opt.shellcmdflag = "-c"
-	opt.shellquote = ""
-	opt.shellxquote = ""
-end
+vim.opt.shell = "cmd.exe"
+vim.opt.shellcmdflag = "/c"
+vim.opt.shellredir = ">%s 2>&1"
+vim.opt.shellpipe = "| tee"
+vim.opt.shellquote = ""
+vim.opt.shellxquote = ""
 
 -- [[ Use this if you want the terminal to be powershell]]
 -- if vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
