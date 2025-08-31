@@ -1,6 +1,6 @@
 # 💤 Nvim-Custom (Windows)
 
-![Screenshot](images/nvim-custom.png)
+![Screenshot](images/nvim-mino.png)
 
 Welcome to my custom Neovim setup! This configuration is designed for Windows users, featuring lazy-loaded plugins for fast startup and modularity, providing a modern, efficient, and tailored environment for development. It focuses on intelligent autocompletion, robust LSP integration, a clean UI/UX, efficient file navigation, and streamlined Git workflows.
 
