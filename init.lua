@@ -1,9 +1,3 @@
---TODO: [ ] Add comments to explain each things
---      [ ] assign peek md command
---      [ ] explain your using git bash
---      [ ] explain all the keymappings
-
---TODO: [ ] Put these to keymap
 vim.keymap.set("i", "<Tab>", "<Tab>", { expr = false }) -- cancel built-in snippet jump
 vim.keymap.set("i", "<S-Tab>", "<S-Tab>", { expr = false }) -- cancel built-in snippet jump
 
@@ -93,9 +87,9 @@ require("lazy").setup({
 vim.cmd([[colorscheme tokyonight]])
 
 -- Safely load core config
-local keyandauto = safe_require("core.keyandauto")
-if keyandauto and type(keyandauto.setup) == "function" then
-	keyandauto.setup()
+local keymaps = safe_require("core.keymaps")
+if keymaps and type(keymaps.setup) == "function" then
+	keymaps.setup()
 end
 
 vim.opt.autoindent = true
