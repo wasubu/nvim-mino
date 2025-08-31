@@ -36,6 +36,11 @@ function M.setup()
 			vim.highlight.on_yank()
 		end,
 	})
+
+	-- Disable h and l in normal mode
+	vim.keymap.set("n", "h", "<Nop>")
+	vim.keymap.set("n", "l", "<Nop>")
+
 	--vim.api.nvim_create_user_command("Ut", function()
 	--	vim.cmd.UndotreeToggle()
 	--end, {})
@@ -44,20 +49,30 @@ function M.setup()
 	vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, { desc = "Toggle UndoTree" })
 
 	vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
-	-- Run current Python file in bottom terminal, only if filetype is python
 	vim.keymap.set("n", "<leader>rr", function()
-		-- Check filetype
-		if vim.bo.filetype ~= "python" then
-			print("Not a Python file!")
-			return
-		end
-
-		-- Get full path of current file
+		local ft = vim.bo.filetype
 		local file = vim.fn.expand("%:p")
+		local dir = vim.fn.expand("%:p:h")
 
-		-- Open terminal at bottom and run Python
-		vim.cmd('botright split | term python "' .. file .. '"')
-	end, { desc = "Run Python in bottom terminal" })
+		if ft == "python" then
+			-- Python: run in bottom terminal, double quotes around path
+			vim.cmd('botright split | terminal python "' .. file .. '"')
+		elseif ft == "html" or ft == "javascript" then
+			-- HTML/JS: toggle live-server
+			if dir == "" then
+				vim.notify("live-server.nvim: No directory found for current file", vim.log.levels.ERROR)
+				return
+			end
+			if not pcall(require, "live-server") then
+				vim.notify("live-server.nvim is not installed!", vim.log.levels.ERROR)
+				return
+			end
+			-- Use toggle instead of start
+			require("live-server").toggle(dir)
+		else
+			vim.notify("No runner configured for filetype: " .. ft, vim.log.levels.WARN)
+		end
+	end, { desc = "Run current file or toggle live-server" })
 end
 
 return M

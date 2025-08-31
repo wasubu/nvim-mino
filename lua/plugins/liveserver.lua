@@ -6,7 +6,7 @@ return {
 			cmd = "live-server.cmd", -- Windows-friendly executable
 		})
 
-		vim.keymap.set("n", "<leader>ls", function()
+		--[[ vim.keymap.set("n", "<leader>ls", function()
 			local dir = vim.fn.expand("%:p:h")
 			if dir == "" then
 				vim.notify("live-server.nvim: No directory found for current file", vim.log.levels.ERROR)
@@ -22,6 +22,6 @@ return {
 				return
 			end
 			require("live-server").stop(dir)
-		end, { desc = "Stop Live Server" })
+		end, { desc = "Stop Live Server" }) ]]
 	end,
 }
