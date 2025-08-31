@@ -5,7 +5,8 @@ opt.relativenumber = true
 opt.clipboard = "unnamedplus"
 opt.wrap = false
 opt.linebreak = true
---opt.mouse = "a"
+
+opt.cindent = true
 opt.autoindent = true
 opt.ignorecase = true
 opt.smartcase = true
