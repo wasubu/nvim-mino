@@ -31,11 +31,6 @@ local function runPlugins()
 end
 
 local function openCloseTree()
-	--[[ vim.keymap.set("n", "<Space>", "<cmd>Neotree toggle reveal<CR>", {
-		desc = "Toggle Neo-tree reveal",
-		noremap = true,
-		silent = true,
-	}) ]]
 	vim.keymap.set("n", "<Space>", function()
 		if vim.bo.filetype == "neo-tree" then
 			vim.cmd("Neotree close")
