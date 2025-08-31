@@ -27,6 +27,7 @@ local function runPlugins()
 		require("plugins.comment"),
 		require("plugins.peek"),
 		require("plugins.fugitive"),
+		-- require("plugins.fold"),
 	})
 end
 
@@ -84,6 +85,7 @@ end
 
 local function loadTheme()
 	vim.cmd([[colorscheme tokyonight]])
+	vim.api.nvim_set_hl(0, "Folded", { bg = "NONE", fg = "#d6a849", italic = true })
 end
 
 local function runCodes()
@@ -95,7 +97,6 @@ local function runCodes()
 	runPlugins()
 	loadTheme()
 	loadKeymaps()
-	openCloseTree()
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "fugitive",
 		callback = function()
@@ -103,6 +104,7 @@ local function runCodes()
 		end,
 	})
 	vim.cmd("cabbrev git Git")
+	openCloseTree()
 end
 
 runCodes()

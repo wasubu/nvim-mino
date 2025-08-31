@@ -24,16 +24,6 @@ local function keyBind_rr()
 	end, { desc = "Run current file or toggle live-server" })
 end
 
-local function hightlightYank()
-	vim.api.nvim_create_autocmd("TextYankPost", {
-		desc = "Highlight when yanking (copying) text",
-		group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-		callback = function()
-			vim.highlight.on_yank()
-		end,
-	})
-end
-
 local function keyBind_telescope()
 	local builtin = require("telescope.builtin")
 	vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
@@ -66,6 +56,42 @@ local function keyBind_changeSizeBuffer()
 	vim.keymap.set("n", "<C-Right>", ":vertical resize +5<CR>", { desc = "Increase window width" })
 end
 
+local function keyBind_foldByHL()
+	vim.keymap.set("n", "h", "zc", { noremap = true, silent = true })
+	vim.keymap.set("n", "l", "zo", { noremap = true, silent = true })
+end
+
+local function auto_flashYank()
+	vim.api.nvim_create_autocmd("TextYankPost", {
+		desc = "Highlight when yanking (copying) text",
+		group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+		callback = function()
+			vim.highlight.on_yank()
+		end,
+	})
+end
+
+local function auto_saveFolds()
+	-- Save folds automatically (only for real files)
+	vim.api.nvim_create_autocmd("BufWinLeave", {
+		pattern = "*",
+		callback = function()
+			if vim.fn.expand("%") ~= "" then
+				vim.cmd("mkview")
+			end
+		end,
+	})
+	-- Load folds automatically (only for real files)
+	vim.api.nvim_create_autocmd("BufWinEnter", {
+		pattern = "*",
+		callback = function()
+			if vim.fn.expand("%") ~= "" then
+				vim.cmd("silent! loadview")
+			end
+		end,
+	})
+end
+
 local function keyBind_other()
 	vim.keymap.set("n", "<Leader>v", "<Cmd>edit $MYVIMRC<CR>", { desc = "Open init.lua" })
 	vim.keymap.set("n", "h", "<Nop>")
@@ -84,9 +110,11 @@ function M.setup()
 	keyBind_moveWindows()
 	keyBind_rr()
 	keyBind_changeSizeBuffer()
+	keyBind_foldByHL()
 
 	-- [[ Autocommands ]]
-	hightlightYank()
+	auto_flashYank()
+	auto_saveFolds()
 end
 
 return M
