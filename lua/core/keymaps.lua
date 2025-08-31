@@ -58,6 +58,14 @@ local function keyBind_unselect()
 	end, { desc = "Clear search highlight", noremap = true, silent = true })
 end
 
+local function keyBind_changeSizeBuffer()
+	-- Resize splits using Ctrl + Arrow keys
+	vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height" })
+	vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease window height" })
+	vim.keymap.set("n", "<C-Left>", ":vertical resize -5<CR>", { desc = "Decrease window width" })
+	vim.keymap.set("n", "<C-Right>", ":vertical resize +5<CR>", { desc = "Increase window width" })
+end
+
 local function keyBind_other()
 	vim.keymap.set("n", "<Leader>v", "<Cmd>edit $MYVIMRC<CR>", { desc = "Open init.lua" })
 	vim.keymap.set("n", "h", "<Nop>")
@@ -75,6 +83,7 @@ function M.setup()
 	keyBind_telescope() -- ff, fb, fh, Fb
 	keyBind_moveWindows()
 	keyBind_rr()
+	keyBind_changeSizeBuffer()
 
 	-- [[ Autocommands ]]
 	hightlightYank()
