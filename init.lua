@@ -26,15 +26,23 @@ local function runPlugins()
 		require("plugins.liveserver"),
 		require("plugins.comment"),
 		require("plugins.peek"),
+		require("plugins.fugitive"),
 	})
 end
 
 local function openCloseTree()
-	vim.keymap.set("n", "<Space>", "<cmd>Neotree toggle reveal<CR>", {
+	--[[ vim.keymap.set("n", "<Space>", "<cmd>Neotree toggle reveal<CR>", {
 		desc = "Toggle Neo-tree reveal",
 		noremap = true,
 		silent = true,
-	})
+	}) ]]
+	vim.keymap.set("n", "<Space>", function()
+		if vim.bo.filetype == "neo-tree" then
+			vim.cmd("Neotree close")
+		else
+			vim.cmd("Neotree reveal")
+		end
+	end, { desc = "Toggle Neo-tree reveal or close", noremap = true, silent = true })
 end
 
 local function setTabToDefault()
@@ -93,6 +101,13 @@ local function runCodes()
 	loadTheme()
 	loadKeymaps()
 	openCloseTree()
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "fugitive",
+		callback = function()
+			vim.cmd("setlocal syntax=git")
+		end,
+	})
+	vim.cmd("cabbrev git Git")
 end
 
 runCodes()
