@@ -72,19 +72,28 @@ local function auto_flashYank()
 end
 
 local function auto_saveFolds()
-	-- Save folds automatically (only for real files)
+	-- Save folds automatically (only for "real" files, skip terminals / unsafe names)
 	vim.api.nvim_create_autocmd("BufWinLeave", {
 		pattern = "*",
 		callback = function()
+			local name = vim.api.nvim_buf_get_name(0)
+			-- Skip if terminal buffer or name has illegal Windows characters
+			if name:match("^term://") or name:match('[":=*?<>|]') then
+				return
+			end
 			if vim.fn.expand("%") ~= "" then
 				vim.cmd("mkview")
 			end
 		end,
 	})
-	-- Load folds automatically (only for real files)
+	-- Load folds automatically (only for "real" files)
 	vim.api.nvim_create_autocmd("BufWinEnter", {
 		pattern = "*",
 		callback = function()
+			local name = vim.api.nvim_buf_get_name(0)
+			if name:match("^term://") or name:match('[":=*?<>|]') then
+				return
+			end
 			if vim.fn.expand("%") ~= "" then
 				vim.cmd("silent! loadview")
 			end
