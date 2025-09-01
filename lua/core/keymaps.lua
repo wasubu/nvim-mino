@@ -1,6 +1,6 @@
 local M = {}
 
-local function keyBind_rr()
+local function keyBind_runFiles()
 	vim.keymap.set("n", "<leader>rr", function()
 		local ft = vim.bo.filetype
 		local file = vim.fn.expand("%:p")
@@ -117,7 +117,7 @@ function M.setup()
 	keyBind_unselect() -- press Esc to unselect text
 	keyBind_telescope() -- ff, fb, fh, Fb
 	keyBind_moveWindows()
-	keyBind_rr()
+	keyBind_runFiles()
 	keyBind_changeSizeBuffer()
 	keyBind_foldByHL()
 
