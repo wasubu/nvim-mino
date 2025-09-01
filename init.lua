@@ -32,6 +32,7 @@ local function runPlugins()
 		require("plugins.tablines"),
 		require("plugins.peek"),
 		require("plugins.fugitive"),
+		require("plugins.ufo"),
 	})
 end
 

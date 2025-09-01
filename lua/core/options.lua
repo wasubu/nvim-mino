@@ -52,21 +52,21 @@ opt.splitright = true
 opt.splitkeep = "cursor"
 opt.mouse = ""
 
--- Folding
-opt.foldmethod = "expr" -- or "expr" for treesitter
-opt.foldlevel = 99 -- open most folds by default
-opt.foldenable = true
-opt.foldtext = "v:lua.MyFoldText()"
-opt.fillchars = { fold = " " } -- no trailing dots
-
--- Custom fold text
-if _G.MyFoldText == nil then
-	function _G.MyFoldText()
-		local line = vim.fn.getline(vim.v.foldstart):gsub("^%s+", "")
-		local count = vim.v.foldend - vim.v.foldstart + 1
-		return "▶ " .. line .. " ... (" .. count .. " lines)"
-	end
-end
+-- -- Folding
+-- opt.foldmethod = "expr" -- or "expr" for treesitter
+-- opt.foldlevel = 99 -- open most folds by default
+-- opt.foldenable = true
+-- opt.foldtext = "v:lua.MyFoldText()"
+-- opt.fillchars = { fold = " " } -- no trailing dots
+--
+-- -- Custom fold text
+-- if _G.MyFoldText == nil then
+-- 	function _G.MyFoldText()
+-- 		local line = vim.fn.getline(vim.v.foldstart):gsub("^%s+", "")
+-- 		local count = vim.v.foldend - vim.v.foldstart + 1
+-- 		return "▶ " .. line .. " ... (" .. count .. " lines)"
+-- 	end
+-- end
 
 -- Shell config for Windows
 vim.opt.shell = "cmd.exe"

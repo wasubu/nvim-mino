@@ -139,7 +139,7 @@ function M.setup()
 
 	-- [[ Autocommands ]]
 	auto_flashYank()
-	auto_saveFolds()
+	-- auto_saveFolds()
 end
 
 return M
