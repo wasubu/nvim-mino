@@ -72,31 +72,47 @@ local function auto_flashYank()
 end
 
 local function auto_saveFolds()
-	-- Save folds automatically (only for "real" files, skip terminals / unsafe names)
+	local group = vim.api.nvim_create_augroup("AutoSaveFoldsDebug", { clear = true })
 	vim.api.nvim_create_autocmd("BufWinLeave", {
+		group = group,
 		pattern = "*",
 		callback = function()
-			local name = vim.api.nvim_buf_get_name(0)
-			-- Skip if terminal buffer or name has illegal Windows characters
-			if name:match("^term://") or name:match('[":=*?<>|]') then
+			local bufname = vim.api.nvim_buf_get_name(0)
+			local file = vim.fn.expand("%:p")
+			local buftype = vim.bo.buftype
+			-- Skip terminals
+			if buftype == "terminal" then
 				return
 			end
-			if vim.fn.expand("%") ~= "" then
-				vim.cmd("mkview")
+			-- Fallback to bufname if expand("%:p") is empty
+			local savepath = file ~= "" and file or bufname
+			-- If still empty, fallback to current directory + buffer name
+			if savepath == "" then
+				local name = vim.fn.expand("%")
+				if name == "" then
+					return
+				end
+				savepath = vim.fn.getcwd() .. "\\" .. name
 			end
+			-- Save folds
+			vim.cmd("mkview")
 		end,
 	})
-	-- Load folds automatically (only for "real" files)
 	vim.api.nvim_create_autocmd("BufWinEnter", {
+		group = group,
 		pattern = "*",
 		callback = function()
-			local name = vim.api.nvim_buf_get_name(0)
-			if name:match("^term://") or name:match('[":=*?<>|]') then
-				return
+			local file = vim.fn.expand("%:p")
+			local bufname = vim.api.nvim_buf_get_name(0)
+			local loadpath = file ~= "" and file or bufname
+			if loadpath == "" then
+				local name = vim.fn.expand("%")
+				if name == "" then
+					return
+				end
+				loadpath = vim.fn.getcwd() .. "\\" .. name
 			end
-			if vim.fn.expand("%") ~= "" then
-				vim.cmd("silent! loadview")
-			end
+			vim.cmd("silent! loadview")
 		end,
 	})
 end
