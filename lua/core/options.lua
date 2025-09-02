@@ -52,6 +52,11 @@ opt.splitright = true
 opt.splitkeep = "cursor"
 opt.mouse = ""
 
+-- apearance
+vim.keymap.set("n", "K", function()
+	vim.lsp.buf.hover({ border = "rounded" })
+end, { desc = "LSP hover with rounded border" })
+
 -- -- Folding
 -- opt.foldmethod = "expr" -- or "expr" for treesitter
 -- opt.foldlevel = 99 -- open most folds by default
