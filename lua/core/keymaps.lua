@@ -135,7 +135,7 @@ function M.setup()
 	keyBind_moveWindows()
 	keyBind_runFiles()
 	keyBind_changeSizeBuffer()
-	keyBind_foldByHL()
+	-- keyBind_foldByHL() -- comment out so h and l would fold, unfold
 
 	-- [[ Autocommands ]]
 	auto_flashYank()

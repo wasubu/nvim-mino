@@ -32,7 +32,7 @@ local function runPlugins()
 		require("plugins.tablines"),
 		require("plugins.peek"),
 		require("plugins.fugitive"),
-		require("plugins.ufo"),
+		-- require("plugins.ufo"), --comment out if you want fold
 	})
 end
 
