@@ -33,11 +33,19 @@ return {
 			},
 
 			-- Custom fold text
-			fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-				local line = vim.fn.getline(lnum):gsub("^%s+", "")
+			fold_virt_text_handler = function(_, lnum, endLnum, width, truncate)
+				-- grab exact leading whitespace (so tabs are preserved too)
+				local indentStr = vim.fn.getline(lnum):match("^%s*") or ""
+
 				local count = endLnum - lnum + 1
+				local line = vim.fn.getline(lnum):gsub("^%s+", "") -- code without indent
 				local suffix = (" ▶ %s ... (%d lines)"):format(line, count)
-				return { { suffix, "FoldSuffix" } }
+
+				-- stick indent in front and truncate to width
+				local text = indentStr .. suffix
+				text = truncate(text, width)
+
+				return { { text, "FoldSuffix" } }
 			end,
 		})
 
@@ -49,7 +57,9 @@ return {
 			callback = function()
 				local bufnr = vim.api.nvim_get_current_buf()
 				local buftype = vim.bo[bufnr].buftype
-				if buftype == "terminal" then return end
+				if buftype == "terminal" then
+					return
+				end
 
 				-- Save folds using UFO buffer manager if attached
 				local ok, bufo = pcall(bufmanager.get, bufnr)
