@@ -125,6 +125,7 @@ local function keyBind_other()
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 	vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, { desc = "Toggle UndoTree" })
 	vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+	vim.api.nvim_set_keymap("n", "<leader><leader>", "<C-^>", { noremap = true, silent = true })
 end
 
 function M.setup()
