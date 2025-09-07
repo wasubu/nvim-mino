@@ -16,6 +16,7 @@ opt.hlsearch = true
 opt.inccommand = "split"
 
 -- Indentation
+opt.smartindent = true
 opt.cindent = true
 opt.autoindent = true
 opt.expandtab = true
@@ -25,6 +26,13 @@ opt.softtabstop = 4
 opt.ignorecase = true
 opt.smartcase = true
 opt.backspace = { "start", "eol", "indent" }
+
+-- File handling
+opt.autoread = true
+opt.autowrite = false
+
+-- Word handling
+opt.iskeyword:append("-")
 
 -- Swap / backup
 opt.swapfile = false
