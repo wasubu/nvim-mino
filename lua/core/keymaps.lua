@@ -61,6 +61,15 @@ local function keyBind_foldByHL()
 	vim.keymap.set("n", "l", "zo", { noremap = true, silent = true })
 end
 
+local function keyBind_copyPath()
+	-- Copy full file path to system clipboard
+	vim.keymap.set("n", "<leader>pa", function()
+		local path = vim.fn.expand("%:p")
+		vim.fn.setreg("+", path)
+		print("file:", path)
+	end, { desc = "Copy full file path" })
+end
+
 local function auto_flashYank()
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		desc = "Highlight when yanking (copying) text",
@@ -117,6 +126,14 @@ local function auto_saveFolds()
 	})
 end
 
+local function keyBind_moveCode()
+	vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
+	vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
+
+	vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+	vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+end
+
 local function keyBind_other()
 	vim.keymap.set("n", "<Leader>v", "<Cmd>edit $MYVIMRC<CR>", { desc = "Open init.lua" })
 	vim.keymap.set("n", "h", "<Nop>")
@@ -126,6 +143,7 @@ local function keyBind_other()
 	vim.keymap.set("n", "<leader>uu", vim.cmd.UndotreeToggle, { desc = "Toggle UndoTree" })
 	vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 	vim.api.nvim_set_keymap("n", "<leader><leader>", "<C-^>", { noremap = true, silent = true })
+	vim.keymap.set({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
 end
 
 function M.setup()
@@ -136,11 +154,25 @@ function M.setup()
 	keyBind_moveWindows()
 	keyBind_runFiles()
 	keyBind_changeSizeBuffer()
+	keyBind_copyPath()
+	keyBind_moveCode()
 	-- keyBind_foldByHL() -- comment out so h and l would fold, unfold
 
 	-- [[ Autocommands ]]
 	auto_flashYank()
 	-- auto_saveFolds()
+	-- Open Neo-tree when Neovim starts
+	vim.api.nvim_create_autocmd("VimEnter", {
+		callback = function()
+			if vim.fn.argc() == 0 then
+				-- No file given → open Neo-tree
+				vim.cmd("Neotree show")
+			else
+				-- File given → reveal in Neo-tree
+				vim.cmd("Neotree reveal")
+			end
+		end,
+	})
 end
 
 return M
